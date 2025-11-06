@@ -23,15 +23,11 @@
 
 <div align="center">
 
-**[🎥 Click Here to Watch Full Video Demo](https://www.dropbox.com/scl/fi/wylnfdej17svr0hjzjcdp/Theramind_v1.MP4?rlkey=35grs9eyzro4p7jzc1u4qw72a&st=y392fmwq&dl=0)**
+### [🎥 Watch Video Demo](https://www.dropbox.com/scl/fi/wylnfdej17svr0hjzjcdp/Theramind_v1.MP4?rlkey=35grs9eyzro4p7jzc1u4qw72a&st=y392fmwq&dl=0)
 
-<a href="https://www.dropbox.com/scl/fi/wylnfdej17svr0hjzjcdp/Theramind_v1.MP4?rlkey=35grs9eyzro4p7jzc1u4qw72a&st=y392fmwq&dl=0">
-  <img src="https://img.shields.io/badge/▶️_WATCH_DEMO-Theramind_v1.0-blueviolet?style=for-the-badge" alt="Watch Demo"/>
-</a>
+*Experience Theramind in action - beautiful UI, smooth animations, and on-device AI conversations*
 
-*Experience Theramind in action: Beautiful UI, smooth animations, and seamless conversations*
-
-> 💡 **Note**: Click the button above to watch the full demo video on Dropbox
+[![Demo Thumbnail](https://img.shields.io/badge/Click%20to%20Watch-Video%20Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.dropbox.com/scl/fi/wylnfdej17svr0hjzjcdp/Theramind_v1.MP4?rlkey=35grs9eyzro4p7jzc1u4qw72a&st=y392fmwq&dl=0)
 
 </div>
 
