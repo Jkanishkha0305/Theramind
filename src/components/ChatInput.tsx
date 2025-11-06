@@ -6,26 +6,42 @@ import {
   StyleSheet,
   Platform,
   KeyboardAvoidingView,
+  Text,
+  Alert,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withSpring,
+  withRepeat,
+  withSequence,
+  Easing,
+  withTiming,
 } from 'react-native-reanimated';
 import * as Haptics from 'expo-haptics';
 import { theme } from '../utils/theme';
+import { voiceService } from '../services/VoiceService';
 
 const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 
 interface ChatInputProps {
   onSend: (message: string) => void;
+  onVoiceTranscript?: (text: string) => void;
   disabled?: boolean;
+  openAIKey?: string;
 }
 
-export const ChatInput: React.FC<ChatInputProps> = ({ onSend, disabled }) => {
+export const ChatInput: React.FC<ChatInputProps> = ({ 
+  onSend, 
+  onVoiceTranscript,
+  disabled,
+  openAIKey,
+}) => {
   const [message, setMessage] = useState('');
+  const [isRecording, setIsRecording] = useState(false);
   const buttonScale = useSharedValue(1);
+  const micScale = useSharedValue(1);
 
   const handleSend = () => {
     if (message.trim() && !disabled) {
@@ -43,8 +59,64 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSend, disabled }) => {
     buttonScale.value = withSpring(1, { damping: 15, stiffness: 150 });
   };
 
+  const handleStartRecording = async () => {
+    try {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      
+      await voiceService.startRecording();
+      setIsRecording(true);
+      
+      // Pulse animation while recording
+      micScale.value = withRepeat(
+        withSequence(
+          withTiming(1.2, { duration: 500, easing: Easing.inOut(Easing.ease) }),
+          withTiming(1, { duration: 500, easing: Easing.inOut(Easing.ease) })
+        ),
+        -1,
+        true
+      );
+    } catch (error) {
+      console.error('Recording error:', error);
+      Alert.alert('Error', 'Could not start recording. Please check microphone permissions.');
+    }
+  };
+
+  const handleStopRecording = async () => {
+    try {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      
+      micScale.value = withSpring(1);
+      setIsRecording(false);
+      
+      const audioUri = await voiceService.stopRecording();
+      
+      if (audioUri && openAIKey) {
+        // Show loading state
+        setMessage('Transcribing...');
+        
+        try {
+          const transcript = await voiceService.transcribeAudio(audioUri, openAIKey);
+          setMessage(transcript);
+          onVoiceTranscript?.(transcript);
+        } catch (error) {
+          console.error('Transcription error:', error);
+          Alert.alert('Error', 'Could not transcribe audio. Please try again or type your message.');
+          setMessage('');
+        }
+      } else if (!openAIKey) {
+        Alert.alert('API Key Required', 'Please add your OpenAI API key in Settings to use voice input.');
+      }
+    } catch (error) {
+      console.error('Stop recording error:', error);
+    }
+  };
+
   const buttonAnimatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: buttonScale.value }],
+  }));
+
+  const micAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: micScale.value }],
   }));
 
   const canSend = message.trim().length > 0 && !disabled;
@@ -56,19 +128,32 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSend, disabled }) => {
     >
       <View style={styles.container}>
         <View style={styles.inputContainer}>
+          {/* Microphone Button */}
+          <AnimatedTouchable
+            onPressIn={handleStartRecording}
+            onPressOut={handleStopRecording}
+            disabled={disabled}
+            style={[styles.micButton, micAnimatedStyle]}
+          >
+            <Text style={[styles.micIcon, isRecording && styles.micIconActive]}>
+              {isRecording ? '⏹' : '🎤'}
+            </Text>
+          </AnimatedTouchable>
+
           <TextInput
             style={styles.input}
-            placeholder="Type a message..."
+            placeholder={isRecording ? "Listening..." : "Type or hold 🎤 to speak..."}
             placeholderTextColor={theme.colors.text.muted}
             value={message}
             onChangeText={setMessage}
             multiline
             maxLength={2000}
-            editable={!disabled}
+            editable={!disabled && !isRecording}
             returnKeyType="send"
             onSubmitEditing={handleSend}
             blurOnSubmit={false}
           />
+          
           <AnimatedTouchable
             onPress={handleSend}
             onPressIn={handlePressIn}
@@ -92,6 +177,13 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSend, disabled }) => {
             </LinearGradient>
           </AnimatedTouchable>
         </View>
+
+        {isRecording && (
+          <View style={styles.recordingIndicator}>
+            <View style={styles.recordingDot} />
+            <Text style={styles.recordingText}>Recording... Release to transcribe</Text>
+          </View>
+        )}
       </View>
     </KeyboardAvoidingView>
   );
@@ -114,6 +206,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: theme.spacing.md,
     paddingVertical: theme.spacing.sm,
     ...theme.shadows.medium,
+  },
+  micButton: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: theme.spacing.sm,
+  },
+  micIcon: {
+    fontSize: 24,
+  },
+  micIconActive: {
+    fontSize: 24,
   },
   input: {
     flex: 1,
@@ -150,6 +256,24 @@ const styles = StyleSheet.create({
     borderBottomColor: 'transparent',
     borderTopColor: 'transparent',
     transform: [{ rotate: '90deg' }],
+  },
+  recordingIndicator: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: theme.spacing.sm,
+    marginTop: theme.spacing.xs,
+  },
+  recordingDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: '#ff4444',
+    marginRight: theme.spacing.sm,
+  },
+  recordingText: {
+    fontSize: theme.typography.caption.fontSize,
+    color: theme.colors.text.secondary,
   },
 });
 
