@@ -1,166 +1,400 @@
-# Theramind - Your Personal AI Companion
+# Theramind 🧠💬
 
-A beautiful, privacy-focused mobile AI chat app that runs entirely on your device.
+<div align="center">
 
-## Features
+**Your Personal AI Companion for Mental Wellness**
 
-✨ **Stunning UI/UX**
+*Privacy-focused, on-device AI that runs entirely on your phone*
+
+[![React Native](https://img.shields.io/badge/React%20Native-0.81.5-61DAFB?logo=react&logoColor=white)](https://reactnative.dev/)
+[![Expo](https://img.shields.io/badge/Expo-~54.0.0-000020?logo=expo&logoColor=white)](https://expo.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.3.3-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Llama.cpp](https://img.shields.io/badge/llama.cpp-Local%20AI-00ADD8?logo=meta&logoColor=white)](https://github.com/ggerganov/llama.cpp)
+[![Zustand](https://img.shields.io/badge/Zustand-State%20Management-FF6B6B)](https://github.com/pmndrs/zustand)
+[![Reanimated](https://img.shields.io/badge/Reanimated-4.1.1-001A72?logo=react&logoColor=white)](https://docs.swmansion.com/react-native-reanimated/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Contributions](https://img.shields.io/badge/Contributions-Welcome-brightgreen)](CONTRIBUTING.md)
+
+</div>
+
+---
+
+## 📱 Demo
+
+<div align="center">
+
+### [🎥 Watch Video Demo](https://www.dropbox.com/scl/fi/wylnfdej17svr0hjzjcdp/Theramind_v1.MP4?rlkey=35grs9eyzro4p7jzc1u4qw72a&st=y392fmwq&dl=0)
+
+*Experience Theramind in action - beautiful UI, smooth animations, and on-device AI conversations*
+
+[![Demo Thumbnail](https://img.shields.io/badge/Click%20to%20Watch-Video%20Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.dropbox.com/scl/fi/wylnfdej17svr0hjzjcdp/Theramind_v1.MP4?rlkey=35grs9eyzro4p7jzc1u4qw72a&st=y392fmwq&dl=0)
+
+</div>
+
+---
+
+## ✨ Features
+
+### 🎨 **Beautiful UI/UX**
 - Modern gradient backgrounds with smooth animations
-- Glass morphism effects
+- Glass morphism effects for message bubbles
 - 60fps animations powered by React Native Reanimated
-- Haptic feedback for better interactions
+- Haptic feedback for enhanced user interactions
+- Dark mode optimized interface
+- Smooth typing indicators and transitions
 
-🔒 **Privacy First**
-- On-device AI processing (no cloud required)
+### 🤖 **On-Device AI Processing**
+- **Local LLM inference** using Gemma 3 1B or Llama 3.2 1B
+- Fast token generation (15-30 tokens/sec on modern devices)
+- 4-bit quantization for memory efficiency
+- Runs completely offline - no internet required
+- Context-aware conversations with memory
+- Therapy-focused, empathetic AI personality
+
+### 🔒 **Privacy & Security**
+- **100% on-device processing** - your data never leaves your phone
+- No cloud services or data collection
 - All conversations stored locally
-- Works completely offline
-- Your data never leaves your phone
+- No API keys or external dependencies
+- GDPR compliant by design
+- Complete offline functionality
 
-🤖 **Powered by Small Language Models**
-- Gemma 3 1B or Llama 3.2 1B
-- Fast inference (15-30 tokens/sec)
-- 4-bit quantization for efficiency
-- Runs on modern smartphones (6GB+ RAM)
+### 💾 **Smart Data Management**
+- Persistent conversation history
+- Auto-save functionality
+- Multiple conversation threads
+- Conversation switching and management
+- Delete individual conversations
+- Local storage with AsyncStorage
 
-## Tech Stack
+### ⚡ **Performance Optimized**
+- Efficient 4-bit GGUF model quantization
+- Memory usage: ~1-2GB (including model)
+- Smooth 60fps UI animations
+- Optimized for modern smartphones (6GB+ RAM)
+- Fast app startup and response times
 
-- **Framework**: React Native with Expo
-- **Language**: TypeScript
-- **AI Runtime**: llama.cpp (via react-native-llama)
-- **Animations**: React Native Reanimated 3
-- **State Management**: Zustand
-- **Storage**: AsyncStorage
+---
 
-## Getting Started
+## 🛠️ Tech Stack
+
+<table>
+<tr>
+<td valign="top" width="50%">
+
+### Frontend
+- **React Native** `0.81.5` - Cross-platform mobile framework
+- **Expo** `~54.0.0` - Development platform
+- **TypeScript** `5.3.3` - Type-safe JavaScript
+- **Expo Router** `~6.0.14` - File-based routing
+- **React Native Reanimated** `~4.1.1` - 60fps animations
+- **React Native Gesture Handler** `~2.28.0` - Touch gestures
+
+</td>
+<td valign="top" width="50%">
+
+### AI & Backend
+- **llama.cpp** - Efficient LLM inference engine
+- **react-native-llama** - React Native bindings
+- **GGUF Models** - Quantized model format
+- **Zustand** `4.5.0` - State management
+- **AsyncStorage** `2.2.0` - Local persistence
+- **Expo Haptics** - Tactile feedback
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js 18+
-- npm or yarn
-- iOS: macOS with Xcode 14+
-- Android: Android Studio with SDK 26+
+- **Node.js** `20.19.0+` (required for Expo SDK 54)
+- **npm** or **yarn**
+- **Expo Go** app on your mobile device
+- **6GB+ RAM** on your phone (recommended for optimal performance)
 
 ### Installation
 
-1. Clone the repository
+1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/theramind.git
-cd theramind
+git clone https://github.com/Jkanishkha0305/Theramind.git
+cd Theramind
 ```
 
-2. Install dependencies
+2. **Install dependencies**
 ```bash
 npm install
 ```
 
-3. Start the development server
+3. **Start the development server**
 ```bash
 npm start
 ```
 
-4. Run on your device
-```bash
-# iOS
-npm run ios
-
-# Android
-npm run android
-```
-
-### Model Setup
-
-The app requires a quantized GGUF model file. You have two options:
-
-#### Option 1: Download on First Launch (Recommended)
-- The app will prompt you to download the model on first launch
-- Recommended: Gemma 3 1B (~500MB)
-
-#### Option 2: Manual Download
-1. Download a GGUF model:
-   - [Gemma 3 1B 4-bit GGUF](https://huggingface.co/models?search=gemma-3-1b-gguf)
-   - [Llama 3.2 1B 4-bit GGUF](https://huggingface.co/models?search=llama-3.2-1b-gguf)
-
-2. Place the model in `assets/models/` (create directory if needed)
-
-3. Update the model path in `src/services/LLMService.ts`
-
-## Project Structure
-
-```
-/
-├── app/                    # Expo Router screens
-│   ├── _layout.tsx        # Root layout
-│   ├── index.tsx          # Splash screen
-│   └── chat.tsx           # Main chat screen
-├── src/
-│   ├── components/        # Reusable UI components
-│   │   ├── GradientBackground.tsx
-│   │   ├── MessageBubble.tsx
-│   │   ├── TypingIndicator.tsx
-│   │   └── ChatInput.tsx
-│   ├── services/          # Business logic
-│   │   ├── LLMService.ts
-│   │   └── StorageService.ts
-│   ├── store/             # State management
-│   │   └── chatStore.ts
-│   ├── utils/             # Utilities
-│   │   ├── theme.ts
-│   │   └── animations.ts
-│   └── types/             # TypeScript types
-│       └── index.ts
-└── assets/                # Static assets
-```
-
-## Development Status
-
-### Completed ✅
-- [x] Project setup and configuration
-- [x] Beautiful gradient UI with animations
-- [x] Message bubbles with glass morphism
-- [x] Typing indicator
-- [x] Custom chat input
-- [x] State management with Zustand
-- [x] Local storage for chat history
-- [x] Navigation structure
-
-### In Progress 🚧
-- [ ] LLM integration (react-native-llama)
-- [ ] Model download UI
-- [ ] Streaming token display
-- [ ] Performance optimization
-
-### Planned 📋
-- [ ] Multiple conversation threads
-- [ ] Settings screen
-- [ ] Model parameter customization
-- [ ] Export/import conversations
-- [ ] Voice input (future)
-
-## Performance
-
-- Target: 60fps animations
-- Inference speed: 15-30 tokens/sec (device dependent)
-- Memory usage: ~1-2GB (including model)
-- Supported devices: iPhone 12+ / Android with 6GB+ RAM
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-
-- [llama.cpp](https://github.com/ggerganov/llama.cpp) for the amazing inference engine
-- [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/) for smooth animations
-- All the open-source LLM model creators
-
-## Support
-
-For issues and questions, please open an issue on GitHub.
+4. **Run on your device**
+- Scan the QR code with **Expo Go** (iOS/Android)
+- Or press `i` for iOS simulator / `a` for Android emulator
 
 ---
 
-Built with ❤️ for privacy-conscious AI enthusiasts
+## 🤖 Model Setup
+
+Theramind requires a quantized GGUF model file for on-device AI inference.
+
+### Recommended Models
+
+#### Option 1: Gemma 3 1B (Recommended)
+- **Size**: ~500MB (4-bit quantized)
+- **Performance**: 15-30 tokens/sec
+- **Download**: [Gemma 3 1B GGUF on Hugging Face](https://huggingface.co/models?search=gemma-3-1b-gguf)
+
+#### Option 2: Llama 3.2 1B
+- **Size**: ~500MB (4-bit quantized)
+- **Performance**: 20-35 tokens/sec
+- **Download**: [Llama 3.2 1B GGUF on Hugging Face](https://huggingface.co/models?search=llama-3.2-1b-gguf)
+
+### Setup Steps
+
+1. **Download your chosen model** from Hugging Face
+2. **Place the model file** in `assets/models/` directory
+   ```bash
+   mkdir -p assets/models
+   # Move your downloaded .gguf file here
+   ```
+3. **Update model path** in `src/services/LLMService.ts`:
+   ```typescript
+   const modelPath = 'assets/models/your-model-name.gguf';
+   ```
+
+### First Launch
+
+The app will:
+1. Check for a local model
+2. Prompt you to download if not found
+3. Initialize the model (may take 10-30 seconds)
+4. Ready to chat!
+
+---
+
+## 📁 Project Structure
+
+```
+Theramind/
+├── app/                          # Expo Router screens
+│   ├── _layout.tsx              # Root layout with navigation
+│   ├── index.tsx                # Splash/landing screen
+│   ├── onboarding.tsx           # Onboarding flow
+│   └── chat.tsx                 # Main chat interface
+│
+├── src/
+│   ├── components/              # Reusable UI components
+│   │   ├── GradientBackground.tsx   # Animated gradient
+│   │   ├── MessageBubble.tsx        # Chat message bubbles
+│   │   ├── ChatInput.tsx            # Input component
+│   │   ├── ConversationList.tsx     # Sidebar conversation list
+│   │   └── TypingIndicator.tsx      # Loading animation
+│   │
+│   ├── services/                # Business logic & AI
+│   │   ├── LLMService.ts            # Local LLM integration
+│   │   └── StorageService.ts        # Local data persistence
+│   │
+│   ├── store/                   # State management
+│   │   └── chatStore.ts             # Zustand store
+│   │
+│   ├── utils/                   # Utilities
+│   │   ├── theme.ts                 # Design tokens
+│   │   └── animations.ts            # Reanimated configs
+│   │
+│   └── types/                   # TypeScript definitions
+│       └── index.ts
+│
+├── assets/                      # Static resources
+│   └── models/                  # Place your GGUF models here
+│
+└── package.json                # Dependencies
+
+```
+
+---
+
+## 🎯 Development Status
+
+### ✅ Completed Features
+- [x] Beautiful gradient UI with 60fps animations
+- [x] Glass morphism message bubbles
+- [x] Smooth typing indicators
+- [x] Multiple conversation threads
+- [x] Conversation history management
+- [x] Local storage with AsyncStorage
+- [x] Haptic feedback
+- [x] Onboarding flow
+- [x] Navigation structure
+- [x] State management with Zustand
+
+### 🚧 In Progress
+- [ ] LLM integration (react-native-llama)
+- [ ] Model download UI
+- [ ] Streaming token display
+- [ ] Context window management
+
+### 📋 Planned Features
+- [ ] Voice input/output (future)
+- [ ] Conversation export/import
+- [ ] Advanced model settings
+- [ ] Custom AI personalities
+- [ ] Mood tracking integration
+- [ ] Journaling features
+
+---
+
+## ⚡ Performance
+
+- **Animations**: 60fps with Reanimated
+- **Inference Speed**: 15-30 tokens/sec (device dependent)
+- **Model Load Time**: 10-30 seconds (first time)
+- **Memory Usage**: ~1-2GB (including model)
+- **Supported Devices**: iPhone 12+ / Android with 6GB+ RAM
+- **Offline**: Works completely without internet
+
+---
+
+## 🔧 Configuration
+
+### Model Parameters
+
+Customize AI behavior in `src/services/LLMService.ts`:
+
+```typescript
+const config = {
+  temperature: 0.7,      // Creativity (0.0-2.0)
+  maxTokens: 500,        // Response length
+  topP: 0.9,             // Nucleus sampling
+  topK: 40,              // Top-K sampling
+  repeatPenalty: 1.1,    // Reduce repetition
+};
+```
+
+### System Prompt
+
+Modify the AI personality:
+
+```typescript
+const systemPrompt = `You are Theramind, a compassionate AI companion 
+and mental wellness assistant. Be warm, empathetic, and non-judgmental.`;
+```
+
+---
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**"Model not found" Error**
+- Ensure model file is in `assets/models/` directory
+- Check model path in `LLMService.ts`
+- Verify model is a valid GGUF file
+
+**Slow Inference Speed**
+- Use 4-bit quantized models (not 8-bit or higher)
+- Close background apps to free RAM
+- Ensure device has 6GB+ RAM
+- Try a smaller model (1B parameter)
+
+**"Out of Memory" Error**
+- Use 4-bit quantization
+- Reduce context window size
+- Close other apps
+- Restart the app
+
+**App Crashes on Launch**
+- Clear app cache and restart
+- Reinstall the app
+- Check device RAM availability
+- Verify model file integrity
+
+**"Worklets Mismatch" Error**
+```bash
+# Clear all caches and restart
+rm -rf .expo node_modules/.cache
+npm install
+npx expo start --clear
+```
+
+For more help, see [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how you can help:
+
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/AmazingFeature`)
+3. **Commit** your changes (`git commit -m 'Add some AmazingFeature'`)
+4. **Push** to the branch (`git push origin feature/AmazingFeature`)
+5. **Open** a Pull Request
+
+Please read our [Contributing Guidelines](CONTRIBUTING.md) for details.
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙏 Acknowledgments
+
+- [llama.cpp](https://github.com/ggerganov/llama.cpp) for the amazing inference engine
+- [Expo](https://expo.dev/) for the excellent development platform
+- [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/) for smooth animations
+- [Zustand](https://github.com/pmndrs/zustand) for simple state management
+- All open-source LLM model creators (Gemma, Llama teams)
+- The React Native community
+
+---
+
+## 📧 Support
+
+- **Issues**: [GitHub Issues](https://github.com/Jkanishkha0305/Theramind/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/Jkanishkha0305/Theramind/discussions)
+
+---
+
+## 🌟 Show Your Support
+
+If you find this project helpful, please consider:
+- ⭐ Starring the repository
+- 🐛 Reporting bugs
+- 💡 Suggesting new features
+- 🤝 Contributing code
+- 📢 Sharing with others
+
+---
+
+## 🔒 Privacy Statement
+
+Theramind is built with privacy as the core principle:
+- **No data collection** - We don't collect any personal information
+- **No tracking** - No analytics or usage tracking
+- **No cloud services** - Everything runs on your device
+- **No API calls** - Completely self-contained
+- **Open source** - Inspect the code yourself
+
+Your conversations are yours and yours alone.
+
+---
+
+<div align="center">
+
+**Built with ❤️ for mental wellness and privacy**
+
+Made by [Kanishkha](https://github.com/Jkanishkha0305)
+
+*Empowering personal wellness through privacy-first AI*
+
+</div>

@@ -4,6 +4,7 @@ export const theme = {
     secondary: '#764ba2',
     tertiary: '#f093fb',
     accent: '#a78bfa',
+    surface: '#1a1625',
     background: {
       dark: '#0f0c29',
       medium: '#302b63',
